@@ -26,10 +26,10 @@
 <center>
 W209 - MIDS Week 6 Assignment - D3 Visualization
 <br>
-Thomas Atkins
+<i>Thomas Atkins</i>
 <br>
 <br>
-This chart shows my work related spend over the past few weeks (2016)
+This chart shows my work related expenses over the past few weeks (2016)
 <br>
 </center>
 </div>
@@ -37,35 +37,35 @@ This chart shows my work related spend over the past few weeks (2016)
 <script type="text/javascript" src="d3.min.js"></script>
 <script type="text/javascript">
 
-w=600;
+w=900;
 h=300;
 var padding = 55;
 
-var spend 		= [42.51,54.49,11.5,24.8,40.96,73.08,3.8,11.69,14.2,40.52,57.54,12.96,15,22,8,9,41.51,56.91,11.6,20,20.9,40.29,56.49,4.4,13.4,28,16,32,42.51,65.63,4.4,18.4,20.9,45.51,55.86,3.8,10,24,48.62,63.84,11.4,13.2,44.4];
+var spend 		= [0,42.51,54.49,11.5,24.8,40.96,73.08,3.8,11.69,14.2,40.52,57.54,12.96,15,22,8,9,41.51,56.91,11.6,20,20.9,40.29,56.49,4.4,13.4,28,16,32,42.51,65.63,4.4,18.4,20.9,45.51,55.86,3.8,10,24,48.62,63.84,11.4,13.2,44.4];
 
-var datetime	= ['2016-01-19','2016-01-19','2016-01-19','2016-01-20','2016-01-21','2016-01-21','2016-01-21','2016-01-21','2016-01-21','2016-01-27','2016-01-27','2016-01-27','2016-01-27','2016-01-27','2016-01-28','2016-01-28','2016-01-29','2016-01-29','2016-01-29','2016-01-29','2016-01-29','2016-02-02','2016-02-02','2016-02-02','2016-02-02','2016-02-02','2016-02-03','2016-02-03','2016-02-04','2016-02-04','2016-02-04','2016-02-04','2016-02-04','2016-02-08','2016-02-08','2016-02-08','2016-02-08','2016-02-08','2016-02-09','2016-02-09','2016-02-09','2016-02-09','2016-02-17'];
+var datetime	= ['2016-01-18','2016-01-19','2016-01-19','2016-01-19','2016-01-20','2016-01-21','2016-01-21','2016-01-21','2016-01-21','2016-01-21','2016-01-27','2016-01-27','2016-01-27','2016-01-27','2016-01-27','2016-01-28','2016-01-28','2016-01-29','2016-01-29','2016-01-29','2016-01-29','2016-01-29','2016-02-02','2016-02-02','2016-02-02','2016-02-02','2016-02-02','2016-02-03','2016-02-03','2016-02-04','2016-02-04','2016-02-04','2016-02-04','2016-02-04','2016-02-08','2016-02-08','2016-02-08','2016-02-08','2016-02-08','2016-02-09','2016-02-09','2016-02-09','2016-02-09','2016-02-17'];
 
 var parseDate = d3.time.format("%Y-%m-%d").parse;
 
 var dataset = []
 
-for (i = 0; i < spend.length; i++) { 
-    dataset.push([parseDate(datetime[i]),spend[i]])
-}
+			for (i = 0; i < spend.length; i++) { 
+			    dataset.push([parseDate(datetime[i]),spend[i]])
+			}
 
-var yScale = d3.scale.linear()
-		 .domain([d3.min(spend),d3.max(spend)])
-		 .range([h - padding, padding]);
+			var yScale = d3.scale.linear()
+					 .domain([d3.min(spend),d3.max(spend)])
+					 .range([h - padding, padding]);
 
-var xScale = d3.time.scale()
-		 .domain([d3.min(dataset,function(d){return d[0];}),d3.max(dataset,function(d){return d[0];})])
-		 .range([padding, w - padding * 2]);
+			var xScale = d3.time.scale()
+					 .domain([d3.min(dataset,function(d){return d[0];}),d3.max(dataset,function(d){return d[0];})])
+					 .range([padding, w - padding * 2]);
 
-//Define X axis
+			//Define X axis
 			var xAxis = d3.svg.axis()
 							  .scale(xScale)
 							  .orient("bottom")
-							  .ticks(21);
+							  .ticks(22);
 
 			//Define Y axis
 			var yAxis = d3.svg.axis()
@@ -80,7 +80,7 @@ var xScale = d3.time.scale()
 						.attr("height", h);
 
 
-svg.selectAll("circle")
+			svg.selectAll("circle")
 			   .data(dataset)
 			   .enter()
 			   .append("circle")
@@ -92,7 +92,7 @@ svg.selectAll("circle")
 			   })
 			   .attr("r",2)
 			   
-//Create X axis
+			//Create X axis
 			svg.append("g")
 				.attr("class", "axis")
 				.attr("transform", "translate(0," + (h - padding) + ")")
@@ -103,13 +103,19 @@ svg.selectAll("circle")
 			    .attr("x", -10)
 			    .attr("dy", ".35em")
 				.style("text-anchor", "end");
-			
+
+			svg.append('g')
+			    .attr('transform', 'translate(' + 20 + ', ' + h/2 + ')')
+			    .append('text')
+			    .attr('text-anchor', 'middle')
+			    .attr('transform', 'rotate(-90)')
+			    .text('Dollars Spent');
+
 			//Create Y axis
 			svg.append("g")
 				.attr("class", "axis")
 				.attr("transform", "translate(" + padding + ",0)")
 				.call(yAxis);
-
 
 </script>
 </body>
